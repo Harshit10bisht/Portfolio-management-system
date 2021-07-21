@@ -1,0 +1,11 @@
+package com.cognizant.pms.dailyshareprice.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cognizant.pms.dailyshareprice.model.ShareDetails;
+
+public interface ShareRepository extends JpaRepository<ShareDetails, String> {
+	public List<ShareDetails> findAll();
+}

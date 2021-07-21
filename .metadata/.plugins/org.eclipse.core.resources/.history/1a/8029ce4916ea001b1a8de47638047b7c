@@ -1,0 +1,5 @@
+package com.cognizant.pms.dailymfnav.controller;
+
+public class MFController {
+
+}

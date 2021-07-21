@@ -1,0 +1,5 @@
+package com.cognizant.pms.dailyshareprice.controller;
+
+public class ShareController {
+
+}

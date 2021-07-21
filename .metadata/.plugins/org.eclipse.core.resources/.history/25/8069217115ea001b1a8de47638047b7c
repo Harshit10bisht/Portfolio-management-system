@@ -1,0 +1,5 @@
+package com.cognizant.pms.dailymfnav.repository;
+
+public class MFRepository {
+
+}

@@ -1,0 +1,5 @@
+package com.cognizant.pms.dailyshareprice.model;
+
+public class ShareDetails {
+
+}

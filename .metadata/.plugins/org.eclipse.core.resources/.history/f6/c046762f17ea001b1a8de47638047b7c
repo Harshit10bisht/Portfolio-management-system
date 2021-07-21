@@ -1,0 +1,21 @@
+package com.cognizant.pms.dailymfnav.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.cognizant.pms.dailymfnav.model.MFDetails;
+
+@Repository
+public interface MFRepository extends JpaRepository<MFDetails, String> {
+	public List<MFDetails> findAll();
+
+	public MFDetails findByMutualFundName(String mutualFundName);
+
+	@Query("SELECT m FROM MutualFund m WHERE m.mutualFundId IN (:mutualFundIdList) order by m.mutualFundId")
+	public List<MFDetails> findByMutualFundId(@Param("mutualFundIdList") List<String> mutualFundIdList);
+
+}

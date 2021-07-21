@@ -1,0 +1,42 @@
+package com.cognizant.pms.dailymfnav.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cognizant.pms.dailymfnav.model.MFDetails;
+import com.cognizant.pms.dailymfnav.service.MFService;
+
+@RestController
+public class MFController {
+	@Autowired
+	private MFService service;
+
+	@GetMapping("/dailyAllMutualFundNav")
+	public List<MFDetails> getAllMutualFund(@RequestHeader("Authorization") String token) {
+		return service.getAllMutualFund();
+	}
+
+	@GetMapping("/dailyMutualFundNav/name/{mutualFundName}")
+	public MutualFund getDailyMutualFundNav(@RequestHeader("Authorization") String token,
+			@PathVariable String mutualFundName) throws MutualFundNotFoundException {
+		if (service.isSessionValid(token)) {
+			return service.getMutualFundByName(mutualFundName);
+		}
+		return null;
+	}
+
+	@GetMapping("/dailyMutualFundNav/{mutualFundId}")
+	public List<Double> getDailyMutualFundNavById(@RequestHeader("Authorization") String token,
+			@PathVariable(value = "mutualFundId") List<String> mutualFundIdList) throws MutualFundNotFoundException {
+		if (service.isSessionValid(token)) {
+			return service.getMutualFundByIdList(mutualFundIdList);
+		}
+		return null;
+	}
+
+}

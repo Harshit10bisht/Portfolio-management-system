@@ -1,0 +1,1 @@
+Create table mf_details (mf_id varchar(5) primary key,mf_name varchar(40),mf_value DOUBLE);

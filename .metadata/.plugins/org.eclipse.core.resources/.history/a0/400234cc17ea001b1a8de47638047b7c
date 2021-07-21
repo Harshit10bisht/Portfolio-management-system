@@ -1,0 +1,49 @@
+package com.cognizant.pms.dailymfnav.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cognizant.pms.dailymfnav.exceptions.MFNotFoundException;
+import com.cognizant.pms.dailymfnav.model.MFDetails;
+import com.cognizant.pms.dailymfnav.repository.MFRepository;
+
+@Service
+public class MFService {
+	@Autowired
+	private MFRepository repository;
+	
+	
+	@Transactional
+	public List<MFDetails> getAllMF(){
+		return repository.findAll();
+	}
+	
+	@Transactional
+	public MFDetails getMFByName(String mutualFundName) throws MFNotFoundException{
+		if(repository.findByMFName(mutualFundName)==null)
+			throw new MFNotFoundException("Mutual Fund Not Found");
+		return repository.findByMFName(mutualFundName);
+	}
+
+//	public List<Double> getMutualFundById(List<String> mutualFundIdList) {
+//		// TODO Auto-generated method stub
+//		for(String s:mutualFundIdList) {
+//			valueList.add(repository.findByMutualFundId(s).getMutualFundValue());
+//		}
+//		 return valueList;
+//	}
+	public List<Double> getMFByIdList(List<String> mfIdList) {
+		List<Double> mfValueList = new ArrayList<>();
+		List<MFDetails> mfList=  repository.findByMFId(mfIdList);
+		for(MFDetails m : mfList) {
+			mfValueList.add(m.getMFValue());
+		}
+		return mfValueList;
+	}
+
+}
