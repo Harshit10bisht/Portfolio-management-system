@@ -16,19 +16,25 @@ import com.cognizant.pms.dailyshareprice.service.ShareService;
 public class ShareController {
 	@Autowired
 	ShareService service;
-	
+
 	@GetMapping("/allshares")
 	public List<ShareDetails> getAllSharePrice() {
 		return service.getallshares();
 	}
-	
+
 	@GetMapping("/svalue")
 	public List<ShareDetails> getByShareValue() {
 		return service.getbysharevalue(1500.0);
 	}
-	
+
 	@GetMapping("/sname/{shareName}")
 	public ShareDetails getShareByName(@PathVariable String shareName) {
 		return service.getsharebyname(shareName);
 	}
+
+	@GetMapping("/{shareIdList}")
+	public List<Double> getDailySharePriceByIDList(@PathVariable(value = "shareIdList") List<String> shareIdList) {
+		return service.getSharebyIdList(shareIdList);
+	}
+
 }

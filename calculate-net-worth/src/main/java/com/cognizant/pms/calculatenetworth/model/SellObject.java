@@ -1,0 +1,17 @@
+package com.cognizant.pms.calculatenetworth.model;
+
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class SellObject {
+	int pid;
+	List<String> shareIdList;
+	List<String> mfIdList;
+
+}

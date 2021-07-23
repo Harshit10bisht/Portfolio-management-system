@@ -28,5 +28,15 @@ public class MFService {
 			throw new MFNotFoundException("Mutual Fund Not Found");
 		return repository.findByMutualFundName(mutualFundName);
 	}
+	
+	public List<Double> getMutualFundByIdList(List<String> mfIdList) {
+		List<Double> mfValueList = new ArrayList<>();
+		List<MFDetails> mfList=  repository.findByMutualFundId(mfIdList);
+		for(MFDetails m : mfList) {
+			mfValueList.add( m.getMutualFundValue());
+		}
+		return mfValueList;
+	}
+
 
 }

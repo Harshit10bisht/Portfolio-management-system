@@ -27,4 +27,10 @@ public class MFController {
 	public MFDetails getDailyMutualFundNav(@PathVariable String mutualFundName) throws MFNotFoundException {
 		return service.getMutualFundByName(mutualFundName);
 	}
+
+	@GetMapping("/{mfIdList}")
+	public List<Double> getDailyMutualFundNavById(@PathVariable(value = "mfIdList") List<String> mfIdList) {
+		return service.getMutualFundByIdList(mfIdList);
+	}
+
 }

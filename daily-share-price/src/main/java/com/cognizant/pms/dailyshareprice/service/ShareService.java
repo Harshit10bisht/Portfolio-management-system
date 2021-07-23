@@ -1,5 +1,6 @@
 package com.cognizant.pms.dailyshareprice.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -27,6 +28,15 @@ public class ShareService {
 
 	public List<ShareDetails> getbysharevalue(Double shareValue) {
 		return repository.findByShareValue(shareValue);
+	}
+
+	public List<Double> getSharebyIdList(List<String> shareIdList) {
+		List<Double> shareValueList = new ArrayList<>();
+		List<ShareDetails> shareList = repository.findByShareId(shareIdList);
+		for (ShareDetails s : shareList) {
+			shareValueList.add(s.getShareValue());
+		}
+		return shareValueList;
 	}
 
 }

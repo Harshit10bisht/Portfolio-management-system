@@ -1,7 +1,0 @@
-package com.cognizant.pms.dailyshareprice.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public class ShareRepository implements JpaRepository<T, ID> {
-
-}

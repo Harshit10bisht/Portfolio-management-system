@@ -15,4 +15,6 @@ public interface MFRepository extends JpaRepository<MFDetails, String> {
 
 	public MFDetails findByMutualFundName(String mutualFundName);
 
+	@Query(value = "SELECT * FROM mf_details m WHERE m.mf_id IN ?1 order by m.mf_id", nativeQuery = true)
+	public List<MFDetails> findByMutualFundId(List<String> mfIdList);
 }
