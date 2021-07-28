@@ -1,1 +1,0 @@
-Create table mutual_fund (mutual_fund_id varchar(5) primary key,mutual_fund_name varchar(20),mutual_fund_value DOUBLE);

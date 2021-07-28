@@ -5,13 +5,18 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cognizant.pms.calculatenetworth.controller.AuthClient;
 import com.cognizant.pms.calculatenetworth.model.AssetDetails;
+import com.cognizant.pms.calculatenetworth.model.AuthResponse;
 import com.cognizant.pms.calculatenetworth.repository.AssetRepository;
 
 @Service
 public class SellAssetService {
 	@Autowired
 	private AssetRepository repository;
+
+	@Autowired
+	private AuthClient authClient;
 
 	public void deleteStockAssetWithUnits(int portfolioId, Map<String, Integer> stockIdList) {
 		for (String id : stockIdList.keySet()) {
@@ -37,6 +42,15 @@ public class SellAssetService {
 				repository.delete(a);
 			}
 		}
+	}
+
+	public Boolean isSessionValid(String token) {
+		try {
+			AuthResponse authResponse = authClient.getValidity(token);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 }

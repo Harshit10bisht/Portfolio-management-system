@@ -1,5 +1,0 @@
-insert into mutual_fund values ('AXIS','Axis Bluechip fund',980.0);
-insert into mutual_fund values ('DSP','DSP Midcap Fund',600.0);
-insert into mutual_fund values ('SBI','SBI Small Cap Fund',430.0);
-insert into mutual_fund values ('PPF','Parag Parikh Flexi Cap Fund',750.0);
-insert into mutual_fund values ('ICI','ICICI Prudential Direct Fund',1200.0);

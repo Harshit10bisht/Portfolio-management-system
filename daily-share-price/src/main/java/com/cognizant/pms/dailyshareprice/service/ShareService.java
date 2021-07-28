@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cognizant.pms.dailyshareprice.controller.AuthClient;
+import com.cognizant.pms.dailyshareprice.model.AuthResponse;
 import com.cognizant.pms.dailyshareprice.model.ShareDetails;
 import com.cognizant.pms.dailyshareprice.repository.ShareRepository;
 
@@ -15,6 +17,9 @@ import com.cognizant.pms.dailyshareprice.repository.ShareRepository;
 public class ShareService {
 	@Autowired
 	private ShareRepository repository;
+
+	@Autowired
+	private AuthClient authClient;
 
 	@Transactional
 	public List<ShareDetails> getallshares() {
@@ -37,6 +42,16 @@ public class ShareService {
 			shareValueList.add(s.getShareValue());
 		}
 		return shareValueList;
+	}
+
+	public Boolean isSessionValid(String token) {
+		try {
+			@SuppressWarnings("unused")
+			AuthResponse authResponse = authClient.getValidity(token);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 }

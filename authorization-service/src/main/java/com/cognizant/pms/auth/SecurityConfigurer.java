@@ -26,7 +26,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 		super.configure(auth);
 		logger.info("START");
 		super.configure(auth);
-//		auth.userDetailsService(pmsuserDetailsService);
 		auth.userDetailsService(pmsuserDetailsService);
 		logger.info("END");
 

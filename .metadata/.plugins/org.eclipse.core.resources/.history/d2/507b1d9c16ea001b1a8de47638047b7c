@@ -1,5 +1,0 @@
-package com.cognizant.pms.dailymfnav.exceptions;
-
-public class MFNotFoundException {
-
-}

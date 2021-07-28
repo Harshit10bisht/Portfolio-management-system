@@ -1,7 +1,0 @@
-package com.cognizant.pms.dailymfnav.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface MFRepository extends JpaRepository<T, ID> {
-
-}
