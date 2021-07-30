@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class SellObjectMap {
 	int pid;
 	Map<String, Integer> stockIdList;
-	Map<String, Integer> mfAssetList;
+	Map<String, Integer> mfIdList;
 
 }

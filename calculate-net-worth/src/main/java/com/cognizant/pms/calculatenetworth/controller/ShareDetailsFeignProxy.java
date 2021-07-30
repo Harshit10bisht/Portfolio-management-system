@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.cognizant.pms.calculatenetworth.model.ShareDetails;
 
@@ -15,6 +16,7 @@ public interface ShareDetailsFeignProxy {
 	public List<ShareDetails> findAll();
 
 	@GetMapping("/dailySharePrice/{shareIdList}")
-	public List<Double> finddailyShareById(@PathVariable(value = "shareIdList") List<String> shareIdList);
+	public List<Double> finddailyShareById(@RequestHeader("Authorization") String token,
+			@PathVariable(value = "shareIdList") List<String> shareIdList);
 
 }

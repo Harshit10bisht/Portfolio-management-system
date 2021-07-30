@@ -47,13 +47,15 @@ public class AuthController {
 		logger.info("START");
 		final UserDetails userdetails = adminDetailService.loadUserByUsername(userlogincredentials.getUserid());
 		String uid = "";
-		String generateToken = "";
+		String generatedToken = "";
 		if (userdetails.getPassword().equals(userlogincredentials.getUpassword())) {
 			uid = userlogincredentials.getUserid();
-			generateToken = jwtutil.generateToken(userdetails);
-			logger.info(generateToken);
+			generatedToken = jwtutil.generateToken(userdetails);
+			logger.info(generatedToken);
 			logger.info("END");
-			return new ResponseEntity<>(new UserData(uid, null, null, generateToken), HttpStatus.OK);
+			UserData demo = new UserData(uid, null, null, generatedToken); 
+			logger.info("DEMO :  " +demo.getUserid() + " : " +demo.getAuthtoken());
+			return new ResponseEntity<>(demo, HttpStatus.OK);
 		} else {
 			logger.info("END - Wrong credentials");
 			return new ResponseEntity<>("Not Accesible", HttpStatus.FORBIDDEN);
@@ -77,7 +79,9 @@ public class AuthController {
 
 			return new ResponseEntity<>(res, HttpStatus.FORBIDDEN);
 		} else {
+			logger.info("-------"+token);
 			String token1 = token.substring(7);
+			logger.info("---//-----"+token1);
 			if (jwtutil.validateToken(token1)) {
 				res.setUid(jwtutil.extractUsername(token1));
 				res.setValid(true);

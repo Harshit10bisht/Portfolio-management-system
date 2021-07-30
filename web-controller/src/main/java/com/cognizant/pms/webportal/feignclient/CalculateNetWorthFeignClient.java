@@ -15,9 +15,10 @@ import com.cognizant.pms.webportal.model.SellObjectMap;
 @FeignClient(name = "CalculateNetWorthService", url = "http://localhost:8092")
 public interface CalculateNetWorthFeignClient {
 	@GetMapping("/networth/{id}")
-	public double getAsset(@RequestHeader("Authorization") String token, @PathVariable(value = "id") int id);
+	public double getAsset(@RequestHeader("Authorization") String token, 
+			@PathVariable(value = "id") int id);
 
-	@GetMapping("/getallassets/{portfolioId}")
+	@GetMapping("/getallassets/{id}")
 	public List<AssetDetails> getAllAssets(@RequestHeader("Authorization") String token,
 			@PathVariable(value = "id") int id);
 

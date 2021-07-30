@@ -25,8 +25,9 @@ public class WebPortalService {
 
 		UserData res = null;
 		try {
-			System.out.println("Under try block of postlogin service");
+			System.out.println("Under try block of postlogin service" +user.getUserid()+ ":" +user.getAuthtoken());
 			res = authClient.login(user);
+			System.out.println("After try block  "+res.getUserid() + ":" +res.getAuthtoken());
 		} catch (Exception e) {
 			String errmsg = "";
 			if (e.getClass().toString().contains("feign.RetryableException"))
@@ -37,7 +38,7 @@ public class WebPortalService {
 			return "login";
 		}
 		System.out.println("After try block of postlogin service");
-		session.setAttribute("token", "Bearer " + res.getAuthToken());
+		session.setAttribute("token", "Bearer " + res.getAuthtoken());
 		session.setAttribute("memberId", res.getUserid());
 		return getHomePage((String) session.getAttribute("token"));
 	}

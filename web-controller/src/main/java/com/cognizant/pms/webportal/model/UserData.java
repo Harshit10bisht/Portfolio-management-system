@@ -14,5 +14,5 @@ public class UserData {
 	private String userid;
 	private String upassword;
 	private String uname;
-	private String authToken;
+	private String authtoken;
 }

@@ -34,16 +34,15 @@ import com.cognizant.pms.webportal.service.WebPortalService;
 public class WebPortalController {
 	@Autowired
 	UserData admin;
-	
+
 	@Autowired
-	private CalculateNetWorthFeignClient networthFeignClient;
+	WebPortalService webportalService;
+
+	
 
 	private static List<String> revokedTokens = new ArrayList<String>();
 
 	private static Logger LOGGER = LoggerFactory.getLogger(WebControllerApplication.class);
-
-	@Autowired
-	WebPortalService webportalService;
 
 	@RequestMapping(path = "/logout", method = RequestMethod.GET)
 	public ModelAndView getLogout(HttpSession session) {
@@ -58,6 +57,16 @@ public class WebPortalController {
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView getLogin(HttpSession session) {
 		LOGGER.info("Starting getLogin");
+		
+		if(session != null)
+			LOGGER.info("Beginning session not null ----- 1");
+		if((String) session.getAttribute("token") != null)
+			LOGGER.info("Beginning session not null ------2");
+		if(webportalService.isSessionValid((String) session.getAttribute("token")))
+			LOGGER.info("Beginning session not null ------3");
+		if(!revokedTokens.contains((String) session.getAttribute("token")))
+			LOGGER.info("Beginning session not null ------4");
+		
 		if (session != null && (String) session.getAttribute("token") != null
 				&& webportalService.isSessionValid((String) session.getAttribute("token"))
 				&& !revokedTokens.contains((String) session.getAttribute("token"))) {
@@ -88,36 +97,43 @@ public class WebPortalController {
 		return new ModelAndView("login");
 	}
 
-	// -------------------------------------------------------------------------------------------------------------- //
-	// -------------------------------------------------------------------------------------------------------------- //
-
+	// --------------------------------------------------------------------------------------------------------------
+	// //
+	// --------------------------------------------------------------------------------------------------------------
+	// //
+	@Autowired
+	private CalculateNetWorthFeignClient networthFeignClient;
+	
 	@RequestMapping(value = "/sellAssets", method = RequestMethod.GET)
 	public ModelAndView showSupplyPage(HttpSession session, ModelMap model) {
-		LOGGER.info("Starting showSellAssets");
+		LOGGER.info("Starting GET sellAssets");
 		if (webportalService.isSessionValid((String) session.getAttribute("token"))
 				&& !revokedTokens.contains((String) session.getAttribute("token"))) {
-			LOGGER.info("Ending showSellAssets");
+			LOGGER.info("Starting GET sellAssets IF LOOP");
 			String s = (String) session.getAttribute("memberId");
 			int i = Integer.parseInt(s);
 			String token = (String) session.getAttribute("token");
 			List<AssetDetails> asset = networthFeignClient.getAllAssets(token, i);
 			LOGGER.info("----------------------------------------------------------------------------" + asset);
 			model.put("asset", asset);
+			LOGGER.info("Ending GET sellAssets IF LOOP");
 			return new ModelAndView("sellAssets");
 		}
-		LOGGER.info("Ending showSellAssets");
+		LOGGER.info("Ending GET sellAssets");
 		return new ModelAndView("login");
 	}
-	
-	// ------------------------------------------------------------------------------------------------------------- //
-	// ------------------------------------------------------------------------------------------------------------- //
+
+	// -------------------------------------------------------------------------------------------------------------
+	// //
+	// -------------------------------------------------------------------------------------------------------------
+	// //
 
 	@RequestMapping(value = "/viewNetworth", method = RequestMethod.GET)
 	public ModelAndView showNetworth(HttpSession session, ModelMap model) {
-		LOGGER.info("Starting viewNetworth");
+		LOGGER.info("Starting GET viewNetworth");
 		if (webportalService.isSessionValid((String) session.getAttribute("token"))
 				&& !revokedTokens.contains((String) session.getAttribute("token"))) {
-			LOGGER.info("Ending viewNetworth");
+			LOGGER.info("Starting GET viewNetworth IF LOOP");
 			// int i=((Integer)session.getAttribute("memberId")).intValue();
 			String s = (String) session.getAttribute("memberId");
 			int i = Integer.parseInt(s);
@@ -126,7 +142,7 @@ public class WebPortalController {
 			// System.out.println(networthFeignClient.getAsset(101));
 			return new ModelAndView("viewNetworth");
 		}
-		LOGGER.info("Ending viewNetworth");
+		LOGGER.info("Ending GET viewNetworth failing condition");
 		return new ModelAndView("login");
 	}
 //	
@@ -141,8 +157,7 @@ public class WebPortalController {
 	@RequestMapping(path = "/viewNetworth", method = RequestMethod.POST)
 	public <user> ModelAndView sellAssetsSelected(HttpSession session, @RequestParam("selected") String[] name,
 			@RequestParam("quantity") String[] count, ModelMap model) {
-		LOGGER.info("Starting postLogin");
-		LOGGER.info("Ending postLogin");
+		LOGGER.info("Starting POST viewNetworth");
 		String s = (String) session.getAttribute("memberId");
 		int i = Integer.parseInt(s);
 		System.out.println("-----------------" + i);
@@ -153,6 +168,7 @@ public class WebPortalController {
 		// LOGGER.info(map.toString());
 		model.put("networth", networthFeignClient.calculateBalancePostSellPerStock(token, sell));
 		model.addAttribute("assetMap", assetMap);
+		LOGGER.info("Ending POST viewNetworth");
 		return new ModelAndView("viewNetworth");
 	}
 

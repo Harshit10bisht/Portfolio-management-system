@@ -93,9 +93,11 @@ public class JwtUtil implements Serializable {
 //	 token has been expired or not
 	
 	public Boolean validateToken(String token) {
-		logger.info("START");
+		logger.info("START : validateToken");
+		logger.info(token);
 
 		try {
+			
 			Jwts.parser().setSigningKey(secretkey).parseClaimsJws(token).getBody();
 			logger.info("END");
 			return true;

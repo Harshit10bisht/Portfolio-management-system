@@ -46,7 +46,7 @@ public class StocksController {
 	}
 
 	@GetMapping("/networth/{id}")
-	public double getAsset(@PathVariable(value = "id") int id) {
+	public double getAsset(@RequestHeader("Authorization") String token, @PathVariable(value = "id") int id) {
 		double netWorth = 0.0;
 		List<String> stockAssetList = new ArrayList<>();
 		List<String> mutualFundAssetList = new ArrayList<>();
@@ -61,11 +61,11 @@ public class StocksController {
 			}
 		}
 		if (!stockAssetList.isEmpty()) {
-			stockValueList = proxy.finddailyShareById(stockAssetList);
+			stockValueList = proxy.finddailyShareById(token, stockAssetList);
 		}
 
 		if (!mutualFundAssetList.isEmpty()) {
-			mutualFundValueList = mutualFundProxy.findMutualDetailsById(mutualFundAssetList);
+			mutualFundValueList = mutualFundProxy.findMutualDetailsById(token, mutualFundAssetList);
 		}
 		int stockCounter = 0, mfCounter = 0;
 		for (AssetDetails a : assets) {
@@ -81,7 +81,7 @@ public class StocksController {
 	}
 
 	@PostMapping("/sellassets")
-	public double calculateBalancePostSellPerStock(@RequestBody SellObjectMap sell) {
+	public double calculateBalancePostSellPerStock(@RequestHeader("Authorization") String token, @RequestBody SellObjectMap sell) {
 		Map<String, Integer> stockIdList = sell.getStockIdList();
 		Map<String, Integer> mfIdList = sell.getMfIdList();
 		if (!stockIdList.isEmpty()) {
@@ -90,12 +90,12 @@ public class StocksController {
 		if (!mfIdList.isEmpty()) {
 			sellService.deleteMutualFundAssetWithUnits(sell.getPid(), mfIdList);
 		}
-		return getAsset(sell.getPid());
+		return getAsset(token, sell.getPid());
 	}
 
-	@GetMapping("/getallassets/{portfolioId}")
-	public List<AssetDetails> getAllAssets(@RequestHeader @PathVariable(value = "portfolioId") int portfolioId) {
-		return service.getAllAssetForPortfolio(portfolioId);
+	@GetMapping("/getallassets/{portfolioid}")
+	public List<AssetDetails> getAllAssets(@RequestHeader("Authorization") String token, @PathVariable(value = "portfolioid") int portfolioid) {
+		return service.getAllAssetForPortfolio(portfolioid);
 	}
 
 }
