@@ -12,33 +12,33 @@
 	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="style/viewNetworth-style.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
 <title>View Networth</title>
 </head>
-<body>
-	<nav class="navbar navbar-dark bg-dark">
-		<a class="navbar-brand" href="#" style="margin-left: 20px;"> <img
-			src="https://images.vexels.com/media/users/3/136559/isolated/preview/624dd0a951a1e8a118215b1b24a0da59-pharmacy-logo-by-vexels.png"
-			width="30" height="30" class="d-inline-block align-top" alt="">
+<body style="background-image: url('images/bg-01.jpg'); ">
+	<nav class="navbar navbar-dark nav_bg">
+		<a class="navbar-brand" href="#" style="margin-left: 20px;"> 
+		<img src="images/icons/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
 			Portfolio Manager
 		</a>
 		<form action="/Home">
 			<button type="button float-right" style="margin-right: 20px;"
-				class="btn btn-outline-light">Home</button>
+				class="login100-form-btn">Home</button>
 		</form>
 	</nav>
 	<br>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3"></div>
-			<div class="col-sm-6 ">
-				<div class="card text-center shadow-lg">
+			<div class="col-sm-5">
+				<div class="card card-body text-center shadow-lg">
 					<img class="card-img-top img-fluid"
 						src="https://cdn.govexec.com/media/img/upload/2020/10/14/shutterstock_1517792294/860x394.jpg"
 						style="width: 600x; height: 300px;" alt="Card image cap">
 					<div class="card-block">
-						<h4 class="card-title">Calculate Networth</h4>
+						<h3 class="card-title">Calculated Networth</h3>
 						
-						<p class="card-text">Your Networth is : ${networth}</p>
+						<h4 class="card-text">Your Networth is : <span class="text-primary"><strong> ${networth} </strong></span></h4>
 						<br> 
 						<c:if test="${assetMap != null}" >
 						<br>
