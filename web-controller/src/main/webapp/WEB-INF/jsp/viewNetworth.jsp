@@ -32,9 +32,7 @@
 			<div class="col-sm-3"></div>
 			<div class="col-sm-5">
 				<div class="card card-body text-center shadow-lg">
-					<img class="card-img-top img-fluid"
-						src="https://cdn.govexec.com/media/img/upload/2020/10/14/shutterstock_1517792294/860x394.jpg"
-						style="width: 600x; height: 300px;" alt="Card image cap">
+					
 					<div class="card-block">
 						<h3 class="card-title">Calculated Networth</h3>
 						

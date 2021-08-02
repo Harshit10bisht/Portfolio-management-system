@@ -60,7 +60,7 @@
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
-					<div class="text-center d-flex justify-content-between mt-4" style="color: red;"><p>${errormsg}</p></div>
+					<p class="text-warning">${errormsg}</p>
 
 					<div class="container-login100-form-btn">
 						<button type="submit" name="submit" class="login100-form-btn">

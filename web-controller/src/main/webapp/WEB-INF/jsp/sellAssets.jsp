@@ -24,7 +24,7 @@ import="java.util.*"
             <div class="col-sm-3"></div>
             <div class="col-sm-5 ">
                 <div class="card card-body text-center shadow-lg">
-                    <img class="card-img-top img-fluid" src="http://ukbusinessbrokers.com/wp-content/uploads/asset-share-sale.jpg" style="width:600x;height:300px;" alt="Card image cap">
+                    
                     <div class="card-block">
                         <h3 class="card-title">Sell Assets</h3>
                         <h5 class="card-text">Select the assets which you want to sell.</h5><br><br>

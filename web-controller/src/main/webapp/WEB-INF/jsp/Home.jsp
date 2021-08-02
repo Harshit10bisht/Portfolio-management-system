@@ -21,7 +21,7 @@
                 <div class="card card-body text-center">
                     <img class="card-img-top img-fluid" src="https://www.thestreet.com/.image/t_share/MTY5NDYzMzA2MzI1NTk5NzA3/stock-vs-shares.png" style="width:600x;height:300px;" alt="Card image cap">
                     <div class="card-block">
-                        <h4 class="card-title">Calculate Portfolio</h4>
+                        <h4 class="card-title pt-2">Calculate Portfolio</h4>
                         <p class="card-text">Click to view my portfolio</p>
                         <form action="/viewNetworth" method="GET"><button type="submit" value="submit" class="btn btn-outline-primary btn_1">Calculate Portfolio</button></form>
                         <p></p>
@@ -32,7 +32,7 @@
                 <div class="card card-body text-center">
                     <img class="card-img-top img-fluid" src="https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F606349%2Finvestor-pressing-sell-button-getty.jpg&w=700&op=resize" style="width:600x;height:300px;" alt="Card image cap">
                     <div class="card-block">
-                        <h4 class="card-title">Sell </h4>
+                        <h4 class="card-title pt-2">Sell </h4>
                         <p class="card-text">Click to sell a stock</p>
                         <form action="/sellAssets" method="GET"><button type="submit" name="submit" class="btn btn-outline-primary btn_1">Sell Stock</button></form>
                         <p></p>
